@@ -3,3 +3,8 @@ spring:
     name: banking-solution
   liquibase:
     change-log: classpath:db/changelog/changelog.xml
+  jpa:
+    open-in-view: false
+  devtools:
+    livereload:
+      enabled: false
