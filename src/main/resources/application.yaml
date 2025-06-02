@@ -1,3 +1,6 @@
+application:
+  banking:
+    bank-code: 214241
 spring:
   application:
     name: banking-solution

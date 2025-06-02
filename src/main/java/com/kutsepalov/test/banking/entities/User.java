@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -28,4 +30,12 @@ public class User {
 
     @Column(nullable = false)
     private String lastName;
+
+    @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        orphanRemoval = true
+    )
+    private Set<Account> accounts;
 }

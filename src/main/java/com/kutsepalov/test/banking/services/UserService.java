@@ -3,7 +3,9 @@ package com.kutsepalov.test.banking.services;
 import com.kutsepalov.test.banking.dtos.user.RegistrationRequestDto;
 import com.kutsepalov.test.banking.dtos.user.UserDto;
 import com.kutsepalov.test.banking.entities.User;
+import com.kutsepalov.test.banking.mappers.UserEntityMapper;
 import com.kutsepalov.test.banking.repositories.UserRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserEntityMapper userEntityMapper;
 
     /**
      * Registers a new user with the provided registration details.
@@ -24,24 +27,15 @@ public class UserService {
      * @param registrationRequest the registration request containing user details
      * @return UserDto containing the registered user's information
      */
-    public UserDto register(RegistrationRequestDto registrationRequest) {
+    public UserDto register(@NonNull RegistrationRequestDto registrationRequest) {
         log.info("Registering new user with username: {}", registrationRequest.getUsername());
         validateRegistration(registrationRequest);
 
-        User user = User.builder()
-                .username(registrationRequest.getUsername())
-                .firstName(registrationRequest.getFirstName())
-                .lastName(registrationRequest.getLastName())
-                .build();
+        User newUser = userRepository.save(
+                userEntityMapper.registrationRequestToEntity(registrationRequest)
+        );
 
-        user = userRepository.save(user);
-
-        return UserDto.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
+        return userEntityMapper.entityToDto(newUser);
     }
 
     private void validateRegistration(RegistrationRequestDto registrationRequest) {
