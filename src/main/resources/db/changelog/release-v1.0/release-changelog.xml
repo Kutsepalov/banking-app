@@ -9,6 +9,7 @@
         <comment>Create database initial schema</comment>
         <sqlFile path="/ddl/001-create-users-table.sql" relativeToChangelogFile="true"/>
         <sqlFile path="/ddl/001-create-accounts-table.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="/ddl/001-create-transactions-table.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
 </databaseChangeLog>

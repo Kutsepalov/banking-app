@@ -1,10 +1,12 @@
 package com.kutsepalov.test.banking.controllers;
 
+import com.kutsepalov.test.banking.dtos.Country;
 import com.kutsepalov.test.banking.dtos.account.AccountCreationRequestDto;
 import com.kutsepalov.test.banking.dtos.account.AccountDto;
+import com.kutsepalov.test.banking.mappers.AccountMapper;
 import com.kutsepalov.test.banking.services.AccountService;
 import lombok.RequiredArgsConstructor;
-import org.iban4j.CountryCode;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -16,31 +18,34 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AccountController {
 
+    @Value("${application.banking.bank-code}")
+    private String bankCode;
+
+    private final AccountMapper accountMapper;
     private final AccountService accountService;
 
     @PostMapping
-    public AccountDto createAccount(@RequestHeader("X-User-Id") Long userId,
+    public AccountDto createAccount(@RequestHeader("X-Username") String username,
                                     @RequestBody AccountCreationRequestDto accountCreationRequestDto) {
-        // Logic to create an account
-        return accountService.createAccount(userId, accountCreationRequestDto);
+        return accountService.createAccount(username,
+                accountMapper.creationRequestToDto(accountCreationRequestDto, bankCode));
     }
 
     @GetMapping("/{accountId}")
-    public AccountDto getAccountDetails(@RequestHeader("X-User-Id") Long userId,
+    public AccountDto getAccountDetails(@RequestHeader("X-Username") String username,
                                         @PathVariable UUID accountId) {
-        // Logic to retrieve account details
-        return accountService.getAccountDetails(userId, accountId);
+        return accountService.getAccountDetails(username, accountId);
     }
 
     @GetMapping
-    public List<AccountDto> getAccounts(@RequestHeader("X-User-Id") Long userId) {
-        return accountService.getAllAccounts(userId);
+    public List<AccountDto> getAccounts(@RequestHeader("X-Username") String username) {
+        return accountService.getAllAccounts(username);
     }
 
     @GetMapping("/supported-countries")
     public List<String> getSupportedCountries() {
-        return Arrays.stream(CountryCode.values())
-                .map(country -> String.join(" - ", country.getAlpha2(), country.getName()))
+        return Arrays.stream(Country.values())
+                .map(country -> String.join(" - ", country.name(), country.getCountry()))
                 .toList();
     }
 

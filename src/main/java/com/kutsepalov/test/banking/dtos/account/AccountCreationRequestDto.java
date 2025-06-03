@@ -1,6 +1,7 @@
 package com.kutsepalov.test.banking.dtos.account;
 
-import jakarta.annotation.Nullable;
+import com.kutsepalov.test.banking.dtos.Country;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,16 +18,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class AccountCreationRequestDto {
 
-    @Nullable
+    @NotNull(message = "Name cannot be null")
     private String accountName;
 
-    @Nullable
-    @Digits(integer = 19, fraction = 2,message = """
+    @Digits(integer = 19, fraction = 2, message = """
             Balance must be a valid decimal number with up to 19 digits
             before the decimal point and 2 digits after the decimal point
             """)
-    private BigDecimal initialBalance;
+    @DecimalMin(value = "0.00", message = "Initial balance must be at least 0.00")
+    private BigDecimal initialBalance = BigDecimal.ZERO;
 
     @NotNull(message = "Country code cannot be null")
-    private CountryCode country;
+    private Country country;
+
+    public CountryCode getCountryCode() {
+        return country.getCountryCode();
+    }
 }

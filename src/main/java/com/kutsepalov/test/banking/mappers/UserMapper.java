@@ -5,8 +5,8 @@ import com.kutsepalov.test.banking.dtos.user.UserDto;
 import com.kutsepalov.test.banking.entities.User;
 import org.mapstruct.Mapper;
 
-@Mapper
-public interface UserEntityMapper {
+@Mapper(componentModel = "spring")
+public interface UserMapper {
 
     /**
      * Converts a User entity to a UserDto.

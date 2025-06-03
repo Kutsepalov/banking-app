@@ -1,13 +1,10 @@
-application:
-  banking:
-    bank-code: 214241
 spring:
   application:
     name: banking-solution
   liquibase:
     change-log: classpath:db/changelog/changelog.xml
   jpa:
-    open-in-view: false
+    open-in-view: true
   devtools:
     livereload:
       enabled: false

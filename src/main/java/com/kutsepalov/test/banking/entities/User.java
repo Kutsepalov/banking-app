@@ -38,4 +38,12 @@ public class User {
         orphanRemoval = true
     )
     private Set<Account> accounts;
+
+    @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY,
+        orphanRemoval = true
+    )
+    private Set<Transaction> transactions;
 }
