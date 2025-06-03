@@ -5,6 +5,7 @@ import com.kutsepalov.test.banking.dtos.account.AccountCreationRequestDto;
 import com.kutsepalov.test.banking.dtos.account.AccountDto;
 import com.kutsepalov.test.banking.mappers.AccountMapper;
 import com.kutsepalov.test.banking.services.AccountService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class AccountController {
 
     @PostMapping
     public AccountDto createAccount(@RequestHeader("X-Username") String username,
-                                    @RequestBody AccountCreationRequestDto accountCreationRequestDto) {
+                                    @RequestBody @Valid AccountCreationRequestDto accountCreationRequestDto) {
         return accountService.createAccount(username,
                 accountMapper.creationRequestToDto(accountCreationRequestDto, bankCode));
     }

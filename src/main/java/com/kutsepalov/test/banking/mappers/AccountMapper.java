@@ -8,10 +8,12 @@ import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 @Mapper(
         componentModel = "spring",
-        uses = {TransactionMapper.class, TimeUtil.class}
+        uses = {TransactionMapper.class, TimeUtil.class},
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public interface AccountMapper {
 

@@ -7,24 +7,22 @@ Spring Boot
 Spring Data JPA
 Liquibase
 Maven
-Testcontainers (for integration testing)
-
 
 ## Build and Run
 
 ### Build the project
 ```
-mvn clean package
+.\mvnw clean package
 ```
 
 ### Build without running tests
 ```
-mvn clean package -DskipTests
+.\mvnw clean package -DskipTests
 ```
 
 ### Run the application
 ```
-mvn spring-boot:run
+.\mvnw spring-boot:run -D"spring-boot.run.profiles"=local
 ```
 
 The application will start on http://localhost:8080.

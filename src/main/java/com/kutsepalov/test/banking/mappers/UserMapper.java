@@ -4,8 +4,12 @@ import com.kutsepalov.test.banking.dtos.user.RegistrationRequestDto;
 import com.kutsepalov.test.banking.dtos.user.UserDto;
 import com.kutsepalov.test.banking.entities.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(
+        componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
+)
 public interface UserMapper {
 
     /**

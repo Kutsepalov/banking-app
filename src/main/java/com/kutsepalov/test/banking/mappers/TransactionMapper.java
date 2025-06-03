@@ -7,10 +7,12 @@ import com.kutsepalov.test.banking.entities.Transaction;
 import com.kutsepalov.test.banking.util.TimeUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 @Mapper(
         componentModel = "spring",
-        uses = {UserMapper.class, TimeUtil.class}
+        uses = {UserMapper.class, TimeUtil.class},
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public interface TransactionMapper {
 

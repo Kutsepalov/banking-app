@@ -26,6 +26,7 @@ public class AccountCreationRequestDto {
             before the decimal point and 2 digits after the decimal point
             """)
     @DecimalMin(value = "0.00", message = "Initial balance must be at least 0.00")
+    @Builder.Default
     private BigDecimal initialBalance = BigDecimal.ZERO;
 
     @NotNull(message = "Country code cannot be null")

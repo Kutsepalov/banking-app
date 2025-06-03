@@ -5,6 +5,7 @@ import com.kutsepalov.test.banking.dtos.transaction.TransactionRequestDto;
 import com.kutsepalov.test.banking.dtos.transaction.TransactionType;
 import com.kutsepalov.test.banking.mappers.TransactionMapper;
 import com.kutsepalov.test.banking.services.TransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class TransactionController {
     @PostMapping("/{operation}")
     public TransactionDto performOperation(@RequestHeader("X-Username") String username,
                                            @PathVariable("operation") TransactionType operation,
-                                           @RequestBody TransactionRequestDto requestDto) {
+                                           @RequestBody @Valid TransactionRequestDto requestDto) {
         TransactionDto transactionDto = transactionMapper.requestToDto(requestDto, operation);
         return transactionService.performOperation(operation, username, transactionDto);
     }
