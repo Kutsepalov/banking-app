@@ -1,5 +1,8 @@
 # Banking Solution
-A simple REST API for a banking application, built with Java and Spring Boot. The API supports user management (with JWT authentication), account operations (create, list, get details), and basic transactions (deposit, withdraw, transfer). The project uses Liquibase for database migrations and is covered by unit tests.
+A simple REST API for a banking application, built with Java and Spring Boot. 
+The API supports user management, account operations (create, list, get details), 
+and basic transactions (deposit, withdraw, transfer). 
+The project uses Liquibase for database migrations and is covered by unit tests.
 
 ## Tech Stack
 Java 21+
@@ -26,3 +29,4 @@ Maven
 ```
 
 The application will start on http://localhost:8080.
+The swagger documentation will be available at http://localhost:8080/swagger-ui.html.

@@ -26,5 +26,6 @@ public class TransactionRequestDto {
             """)
     @DecimalMin(value = "0.01", message = "Amount must be at least 0.01")
     private BigDecimal amount;
+    @NotNull(message = "Currency cannot be null")
     private String currency;
 }
