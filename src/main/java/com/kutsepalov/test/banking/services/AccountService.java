@@ -110,7 +110,12 @@ public class AccountService {
         return accountMapper.entityToDto(newAccount);
     }
 
-
+    /**
+     * Updates the balance of a specific account.
+     *
+     * @param sourceAccount the AccountDto representing the account to update
+     * @param newBalance the new balance to set
+     */
     public void updateBalance(@NonNull AccountDto sourceAccount,
                               @NonNull BigDecimal newBalance) {
         log.debug("Updating balance for account[iban={}]", sourceAccount.getIban());
